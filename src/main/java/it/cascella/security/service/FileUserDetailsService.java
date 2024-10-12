@@ -37,6 +37,7 @@ public class FileUserDetailsService implements UserDetailsService {
                             .username(username)
                             .password(password)
                             .authorities("read")
+                            .disabled(!enabled)
                             .build());
                 }
             }
