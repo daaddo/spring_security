@@ -63,11 +63,11 @@ public class ProjectSecurityConfiguration {
 
         return new InMemoryUserDetailsManager(user);
     }
-    @Profile("database")
+    /*@Profile("database")
     @Bean
     public UserDetailsService getDbUserDetailsService(DataSource dataSource){
         return  new JdbcUserDetailsManager(dataSource);
-    }
+    }*/
 
 
     @Bean
