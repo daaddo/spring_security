@@ -22,12 +22,15 @@ import static org.springframework.security.core.userdetails.User.withDefaultPass
 
 @Configuration
 public class ProjectSecurityConfiguration {
-
+/*
+"/cards","/contact","/error","/register"
+*/
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(cc -> cc.disable());
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/account","balance").authenticated()//necessitano del form login NON NECESSITANO DEL /
-                .requestMatchers("/cards","/contact","/error").permitAll()//non necessitano di autenticazione
+                .requestMatchers("/cards","/contact","/error","/register").permitAll()//non necessitano di autenticazione
         );
         http.formLogin(withDefaults());
         //http.formLogin(flc -> flc.disable()); //this will disable the form login
