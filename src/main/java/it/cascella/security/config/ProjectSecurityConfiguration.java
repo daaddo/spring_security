@@ -46,32 +46,7 @@ public class ProjectSecurityConfiguration {
         return http.build();
     }
 
-    @Profile("default")
-    @Bean
-    public UserDetailsService getUserDetailsService() {
-        UserDetails user = User
-                .withUsername("user")
-                .password("{bcrypt}$2a$12$7NGgXefpV2x3CGMfJRTZO.CNGMbjNTmsbKFLrr20YewvpTda9XqCK")// password
-                .authorities("read")
-                .build();
-        UserDetails admin = withDefaultPasswordEncoder()
-                .username("admin")
-                .password("password")
-                .authorities("read")
-                .build();
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-    @Profile("dev")
-    @Bean
-    public UserDetailsService getDevUserDetailsService() {
-        UserDetails user = withDefaultPasswordEncoder()
-                .username("dev")
-                .password("dev")// password
-                .authorities("read")
-                .build();
 
-        return new InMemoryUserDetailsManager(user);
-    }
     /*@Profile("database")
     @Bean
     public UserDetailsService getDbUserDetailsService(DataSource dataSource){

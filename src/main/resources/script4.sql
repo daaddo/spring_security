@@ -1,8 +1,8 @@
-drop database if exists securityDB;
+drop database if exists spring_security;
 
-create database if not exists securityDB;
+create database if not exists spring_security;
 
-use securityDB;
+use spring_security;
 
 drop table if exists users;
 drop table if exists authorities;
@@ -17,7 +17,7 @@ create table customer (
 );
 
 
-INSERT IGNORE INTO customer (email, password, age, role) VALUES ('test@gmail.com','{custom}sale:tset', 18,'ROLE_USER');
+INSERT IGNORE INTO customer (email, password, age, role) VALUES ('test@gmail.com','{our}sale:tset', 18,'ROLE_USER');
 INSERT IGNORE INTO customer (email, password, age, role) VALUES ('admin@gmail.com','{bcrypt}$2a$12$c5e82yyFkbf.J4J188Rns.wx31f0uKe7wtqeu7inbPqIGBNXh0QAW', 40, 'ROLE_ADMIN');
 INSERT IGNORE INTO customer (email, password, age, role) VALUES ('gino@gmail.com','{noop}gino', 16, 'ROLE_USER');
 

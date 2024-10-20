@@ -20,9 +20,15 @@ import org.springframework.stereotype.Service;
 
 @Component
 @Profile("database")
-@AllArgsConstructor
+
 @NoArgsConstructor
 public class CustomAuthenticationProvider implements AuthenticationProvider {
+
+    @Autowired
+    public CustomAuthenticationProvider(CustomerUserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+    }
     private CustomerUserDetailsService userDetailsService;
     private PasswordEncoder passwordEncoder;
 
