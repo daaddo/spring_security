@@ -28,9 +28,8 @@ public class CustomerUserDetailsService implements UserDetailsService {
                 List.of(new SimpleGrantedAuthority("ROLE_" + customer.getRole()))
         );
     }
-
-
-
-
-
+    public int getCustomerAgeByEmail(String email) throws UsernameNotFoundException{
+        return customerRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email)).getAge();
+    }
 }

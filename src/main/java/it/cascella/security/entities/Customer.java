@@ -16,5 +16,7 @@ public class Customer {
     @Column(name = "email", unique = true)
     private String email;
     private String password;
+    private int age;
     private String role;
+
 }
