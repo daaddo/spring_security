@@ -14,7 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+/*
 @Profile("database")
+*/
 @RequiredArgsConstructor
 public class CustomerUserDetailsService implements UserDetailsService {
     private final CustomerRepository customerRepository;
