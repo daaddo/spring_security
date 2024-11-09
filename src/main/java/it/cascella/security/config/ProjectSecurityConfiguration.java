@@ -31,8 +31,25 @@ public class ProjectSecurityConfiguration {
 "/cards","/contact","/error","/register"
 */
 
+    @Profile("!https")
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(cc -> cc.disable());
+        http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/account","balance").authenticated()//necessitano del form login NON NECESSITANO DEL /
+                .requestMatchers("/cards","/contact","/error","/register","/login","/denied","/timeout").permitAll()//non necessitano di autenticazione
+        );
+        http.formLogin(withDefaults());
+        //http.formLogin(flc -> flc.disable()); //this will disable the form login
+        http.sessionManagement(sm ->sm.invalidSessionUrl("/timeout"));
+        http.httpBasic(withDefaults());
+        //http.httpBasic(hbc -> hbc.disable()); //this will disable the http basic authentication
+        return http.build();
+    }
+    @Profile("https")
+    @Bean
+    SecurityFilterChain httpsSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.requiresChannel((requiresChannel) -> requiresChannel.anyRequest().requiresSecure());
         http.csrf(cc -> cc.disable());
         http.authorizeHttpRequests((requests) -> requests
                 .requestMatchers("/account","balance").authenticated()//necessitano del form login NON NECESSITANO DEL /
@@ -45,7 +62,6 @@ public class ProjectSecurityConfiguration {
         //http.httpBasic(hbc -> hbc.disable()); //this will disable the http basic authentication
         return http.build();
     }
-
 
     /*@Profile("database")
     @Bean
