@@ -1,10 +1,13 @@
 package it.cascella.security.config;
 
+import it.cascella.security.auth.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,6 +42,9 @@ public class ProjectSecurityConfiguration {
                 .requestMatchers("/account","balance").authenticated()//necessitano del form login NON NECESSITANO DEL /
                 .requestMatchers("/cards","/contact","/error","/register","/login","/denied","/timeout").permitAll()//non necessitano di autenticazione
         );
+        http.httpBasic(httpCustomizer ->{
+            httpCustomizer.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint());
+        });
         http.formLogin(withDefaults());
         //http.formLogin(flc -> flc.disable()); //this will disable the form login
         http.sessionManagement(sm ->sm.invalidSessionUrl("/timeout"));
