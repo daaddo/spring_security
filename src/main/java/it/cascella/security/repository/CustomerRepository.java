@@ -1,6 +1,7 @@
 package it.cascella.security.repository;
 
 import it.cascella.security.entities.Customer;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
